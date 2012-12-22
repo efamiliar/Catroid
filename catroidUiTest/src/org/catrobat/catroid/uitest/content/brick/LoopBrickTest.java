@@ -135,27 +135,19 @@ public class LoopBrickTest extends ActivityInstrumentationTestCase2<MainMenuActi
 		assertEquals("Incorrect number of bricks.", 1, projectBrickList.size());
 		assertTrue("Wrong Brick instance.", (projectBrickList.get(0) instanceof ChangeYByNBrick));
 
-		display(8, projectBrickList);
-
 		UiTestUtils.addNewBrick(solo, R.string.brick_repeat);
 		yPosition = UiTestUtils.getListItemYPositions(solo);
 		addedYPosition = UiTestUtils.getAddedListItemYPosition(solo);
 		solo.drag(20, 20, addedYPosition, yPosition.get(3) + 20, 20);
-
-		display(9, projectBrickList);
 
 		UiTestUtils.addNewBrick(solo, R.string.brick_set_costume);
 		yPosition = UiTestUtils.getListItemYPositions(solo);
 		addedYPosition = UiTestUtils.getAddedListItemYPosition(solo);
 		solo.drag(20, 20, addedYPosition, yPosition.get(5) + 20, 20);
 
-		display(10, projectBrickList);
-
 		yPosition = UiTestUtils.getListItemYPositions(solo);
 		UiTestUtils.longClickAndDrag(solo, 10, yPosition.get(4), 10, yPosition.get(5) + 20, 20);
 		projectBrickList = project.getSpriteList().get(0).getScript(1).getBrickList();
-
-		display(11, projectBrickList);
 
 		assertTrue("Wrong Brick instance.", (projectBrickList.get(2) instanceof SetCostumeBrick));
 		assertTrue("Wrong Brick instance.", (projectBrickList.get(3) instanceof LoopEndBrick));
