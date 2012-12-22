@@ -29,7 +29,6 @@ import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
 import org.catrobat.catroid.content.Script;
 import org.catrobat.catroid.content.Sprite;
-import org.catrobat.catroid.content.StartScript;
 import org.catrobat.catroid.content.bricks.Brick;
 import org.catrobat.catroid.ui.MainMenuActivity;
 import org.catrobat.catroid.ui.ProjectActivity;
@@ -163,18 +162,17 @@ public class ScriptFragmentTest extends ActivityInstrumentationTestCase2<MainMen
 	public void testOnlyAddControlBricks() {
 		initEmptyProject();
 		Sprite sprite = ProjectManager.getInstance().getCurrentSprite();
-		assertEquals(1, sprite.getNumberOfScripts());
+		assertEquals("Project should contain only one script.", 1, sprite.getNumberOfScripts());
 
 		Script script = sprite.getScript(0);
-		assertTrue(script instanceof StartScript);
-		assertTrue(script.getBrickList().isEmpty());
+		assertTrue("Single script should contain no bricks.", script.getBrickList().isEmpty());
 
 		try {
 			List<Integer> yPositionList = UiTestUtils.getListItemYPositions(solo);
 			UiTestUtils.addNewBrick(solo, R.string.brick_broadcast_receive);
-			solo.clickLongOnScreen(0, yPositionList.get(1));
+			solo.clickLongOnScreen(20, yPositionList.get(1));
 		} catch (IndexOutOfBoundsException indexOutOfBoundsException) {
-			fail();
+			fail("New added brick position in sprite is invalid.");
 		}
 	}
 
