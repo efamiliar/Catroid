@@ -108,17 +108,19 @@ public class LoopBrickTest extends ActivityInstrumentationTestCase2<MainMenuActi
 		yPosition = UiTestUtils.getListItemYPositions(solo);
 		int addedYPosition = UiTestUtils.getAddedListItemYPosition(solo);
 
+		System.out.println("LOG: " + addedYPosition);
+		System.out.println("LOG: " + yPosition);
+		display(0, projectBrickList);
+
 		solo.drag(20, 20, addedYPosition, yPosition.get(2), 20);
 
 		Sprite sprite = ProjectManager.getInstance().getCurrentSprite();
 		assertEquals("Incorrect number of Scripts.", 2, sprite.getNumberOfScripts());
 
-		display(6, projectBrickList);
-
 		solo.goBack();
 
 		yPosition = UiTestUtils.getListItemYPositions(solo);
-		solo.clickOnScreen(20, yPosition.get(3) - 20);
+		solo.clickOnScreen(20, yPosition.get(3));
 		clickOnDeleteInDialog();
 
 		display(7, projectBrickList);
