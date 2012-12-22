@@ -115,7 +115,7 @@ public class LoopBrickTest extends ActivityInstrumentationTestCase2<MainMenuActi
 		solo.goBack();
 
 		yPosition = UiTestUtils.getListItemYPositions(solo);
-		solo.clickOnScreen(20, yPosition.get(3) + 20);
+		solo.clickOnScreen(20, yPosition.get(3) - 20);
 		clickOnDeleteInDialog();
 
 		assertEquals("Incorrect number of bricks.", 1, projectBrickList.size());
