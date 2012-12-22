@@ -120,7 +120,7 @@ public class BrickDragAndDropTest extends ActivityInstrumentationTestCase2<MainM
 		@SuppressWarnings("deprecation")
 		int height = display.getHeight();
 
-		solo.sleep(500);
+		solo.sleep(200);
 		solo.drag(20, 20, 300, height - 20, 100);
 		solo.sleep(200);
 

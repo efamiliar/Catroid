@@ -23,7 +23,6 @@
 package org.catrobat.catroid.uitest.content.brick;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
@@ -108,30 +107,16 @@ public class LoopBrickTest extends ActivityInstrumentationTestCase2<MainMenuActi
 		yPosition = UiTestUtils.getListItemYPositions(solo);
 		int addedYPosition = UiTestUtils.getAddedListItemYPosition(solo);
 
-		System.out.println("LOG: " + addedYPosition);
-		System.out.println("LOG: " + yPosition);
-		display(0, projectBrickList);
-
 		//		solo.drag(20, 20, addedYPosition, yPosition.get(2), 20);
 
 		Sprite sprite = ProjectManager.getInstance().getCurrentSprite();
 		assertEquals("Incorrect number of Scripts.", 2, sprite.getNumberOfScripts());
-
-		Script script = sprite.getScript(0);
-		System.out.println("LOG: " + script.getClass().getSimpleName());
-		display(1, script.getBrickList());
-
-		script = sprite.getScript(1);
-		System.out.println("LOG: " + script.getClass().getSimpleName());
-		display(2, script.getBrickList());
 
 		solo.goBack();
 
 		yPosition = UiTestUtils.getListItemYPositions(solo);
 		solo.clickOnScreen(20, yPosition.get(3));
 		clickOnDeleteInDialog();
-
-		display(7, projectBrickList);
 
 		assertEquals("Incorrect number of bricks.", 1, projectBrickList.size());
 		assertTrue("Wrong Brick instance.", (projectBrickList.get(0) instanceof ChangeYByNBrick));
@@ -159,13 +144,6 @@ public class LoopBrickTest extends ActivityInstrumentationTestCase2<MainMenuActi
 
 		assertTrue("Wrong Brick instance.", (projectBrickList.get(2) instanceof SetCostumeBrick));
 		assertTrue("Wrong Brick instance.", (projectBrickList.get(3) instanceof LoopEndBrick));
-	}
-
-	private void display(int line, List<Brick> bricks) {
-		System.out.println("LOG: line " + line);
-		for (int index = 0; index < bricks.size(); index++) {
-			System.out.println("LOG:    " + bricks.get(index).getClass().getSimpleName());
-		}
 	}
 
 	public void testForeverBrick() {

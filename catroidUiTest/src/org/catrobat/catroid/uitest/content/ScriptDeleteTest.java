@@ -77,6 +77,7 @@ public class ScriptDeleteTest extends ActivityInstrumentationTestCase2<MainMenuA
 		assertTrue("Set costume brick was not added", solo.searchText(brickSetCostumeText));
 
 		UiTestUtils.addNewBrick(solo, R.string.brick_set_size_to);
+		solo.clickOnText(brickSetCostumeText);
 		assertTrue("Set size to brick was not added", solo.searchText(solo.getString(R.string.brick_set_size_to)));
 	}
 
