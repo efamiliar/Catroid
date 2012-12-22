@@ -115,7 +115,7 @@ public class LoopBrickTest extends ActivityInstrumentationTestCase2<MainMenuActi
 		solo.goBack();
 
 		yPosition = UiTestUtils.getListItemYPositions(solo);
-		solo.clickOnScreen(20, yPosition.get(3));
+		solo.clickOnScreen(20, yPosition.get(3) + 20);
 		clickOnDeleteInDialog();
 
 		assertEquals("Incorrect number of bricks.", 1, projectBrickList.size());
@@ -168,18 +168,10 @@ public class LoopBrickTest extends ActivityInstrumentationTestCase2<MainMenuActi
 		yPosition = UiTestUtils.getListItemYPositions(solo);
 		addedYPosition = UiTestUtils.getAddedListItemYPosition(solo);
 
-		solo.drag(20, 20, addedYPosition, yPosition.get(2) + 10, 20);
+		solo.drag(20, 20, addedYPosition, yPosition.get(2) + 20, 20);
 		solo.sleep(200);
 
 		assertEquals("Incorrect number of bricks.", 7, projectBrickList.size());
-
-		int index = 0;
-		for (Brick brick : projectBrickList) {
-			System.out.println("LOG: " + index + " - " + brick.getClass().getSimpleName());
-			index++;
-		}
-		solo.sleep(200);
-
 		assertTrue("Wrong Brick instance.", projectBrickList.get(2) instanceof ForeverBrick);
 		assertTrue("Wrong Brick instance.", projectBrickList.get(4) instanceof LoopEndlessBrick);
 		assertEquals("Wrong LoopBegin-Brick instance", ((NestingBrick) projectBrickList.get(4))
