@@ -172,7 +172,14 @@ public class LoopBrickTest extends ActivityInstrumentationTestCase2<MainMenuActi
 		solo.sleep(200);
 
 		assertEquals("Incorrect number of bricks.", 7, projectBrickList.size());
-		solo.sleep(500);
+
+		int index = 0;
+		for (Brick brick : projectBrickList) {
+			System.out.println("LOG: " + index + " - " + brick.getClass().getSimpleName());
+			index++;
+		}
+		solo.sleep(200);
+
 		assertTrue("Wrong Brick instance.", projectBrickList.get(2) instanceof ForeverBrick);
 		assertTrue("Wrong Brick instance.", projectBrickList.get(4) instanceof LoopEndlessBrick);
 		assertEquals("Wrong LoopBegin-Brick instance", ((NestingBrick) projectBrickList.get(4))
