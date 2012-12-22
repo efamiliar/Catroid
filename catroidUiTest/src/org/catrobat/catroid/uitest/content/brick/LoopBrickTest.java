@@ -81,26 +81,18 @@ public class LoopBrickTest extends ActivityInstrumentationTestCase2<MainMenuActi
 		ArrayList<Integer> yPosition;
 		ArrayList<Brick> projectBrickList = project.getSpriteList().get(0).getScript(0).getBrickList();
 
-		display(0, projectBrickList);
-
 		yPosition = UiTestUtils.getListItemYPositions(solo);
 		UiTestUtils.longClickAndDrag(solo, 10, yPosition.get(1), 10, yPosition.get(4) + 20, 20);
 		assertEquals("Incorrect number of bricks.", 3, projectBrickList.size());
 		assertTrue("Wrong Brick instance.", (projectBrickList.get(1) instanceof LoopBeginBrick));
-
-		display(1, projectBrickList);
 
 		yPosition = UiTestUtils.getListItemYPositions(solo);
 		UiTestUtils.longClickAndDrag(solo, 10, yPosition.get(3), 10, yPosition.get(0), 20);
 		assertEquals("Incorrect number of bricks.", 3, projectBrickList.size());
 		assertTrue("Wrong Brick instance.", (projectBrickList.get(2) instanceof LoopEndBrick));
 
-		display(2, projectBrickList);
-
 		yPosition = UiTestUtils.getListItemYPositions(solo);
 		UiTestUtils.longClickAndDrag(solo, 10, yPosition.get(2), 10, 0, 20);
-
-		display(3, projectBrickList);
 
 		assertEquals("Incorrect number of bricks.", 3, projectBrickList.size());
 		assertTrue("Wrong Brick instance - expected LoopBeginBrick but was "
@@ -112,13 +104,9 @@ public class LoopBrickTest extends ActivityInstrumentationTestCase2<MainMenuActi
 		assertEquals("Incorrect number of bricks.", 3, projectBrickList.size());
 		assertTrue("Wrong Brick instance.", (projectBrickList.get(2) instanceof LoopEndBrick));
 
-		display(4, projectBrickList);
-
 		UiTestUtils.addNewBrick(solo, R.string.brick_broadcast_receive);
 		yPosition = UiTestUtils.getListItemYPositions(solo);
 		int addedYPosition = UiTestUtils.getAddedListItemYPosition(solo);
-
-		display(5, projectBrickList);
 
 		solo.drag(20, 20, addedYPosition, yPosition.get(2), 20);
 
@@ -130,7 +118,7 @@ public class LoopBrickTest extends ActivityInstrumentationTestCase2<MainMenuActi
 		solo.goBack();
 
 		yPosition = UiTestUtils.getListItemYPositions(solo);
-		solo.clickOnScreen(20, yPosition.get(3));
+		solo.clickOnScreen(20, yPosition.get(3) - 20);
 		clickOnDeleteInDialog();
 
 		display(7, projectBrickList);
