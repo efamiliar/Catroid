@@ -23,6 +23,7 @@
 package org.catrobat.catroid.uitest.content.brick;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
@@ -80,18 +81,26 @@ public class LoopBrickTest extends ActivityInstrumentationTestCase2<MainMenuActi
 		ArrayList<Integer> yPosition;
 		ArrayList<Brick> projectBrickList = project.getSpriteList().get(0).getScript(0).getBrickList();
 
+		display(0, projectBrickList);
+
 		yPosition = UiTestUtils.getListItemYPositions(solo);
 		UiTestUtils.longClickAndDrag(solo, 10, yPosition.get(1), 10, yPosition.get(4) + 20, 20);
 		assertEquals("Incorrect number of bricks.", 3, projectBrickList.size());
 		assertTrue("Wrong Brick instance.", (projectBrickList.get(1) instanceof LoopBeginBrick));
+
+		display(1, projectBrickList);
 
 		yPosition = UiTestUtils.getListItemYPositions(solo);
 		UiTestUtils.longClickAndDrag(solo, 10, yPosition.get(3), 10, yPosition.get(0), 20);
 		assertEquals("Incorrect number of bricks.", 3, projectBrickList.size());
 		assertTrue("Wrong Brick instance.", (projectBrickList.get(2) instanceof LoopEndBrick));
 
+		display(2, projectBrickList);
+
 		yPosition = UiTestUtils.getListItemYPositions(solo);
 		UiTestUtils.longClickAndDrag(solo, 10, yPosition.get(2), 10, 0, 20);
+
+		display(3, projectBrickList);
 
 		assertEquals("Incorrect number of bricks.", 3, projectBrickList.size());
 		assertTrue("Wrong Brick instance - expected LoopBeginBrick but was "
@@ -103,20 +112,28 @@ public class LoopBrickTest extends ActivityInstrumentationTestCase2<MainMenuActi
 		assertEquals("Incorrect number of bricks.", 3, projectBrickList.size());
 		assertTrue("Wrong Brick instance.", (projectBrickList.get(2) instanceof LoopEndBrick));
 
+		display(4, projectBrickList);
+
 		UiTestUtils.addNewBrick(solo, R.string.brick_broadcast_receive);
 		yPosition = UiTestUtils.getListItemYPositions(solo);
 		int addedYPosition = UiTestUtils.getAddedListItemYPosition(solo);
+
+		display(5, projectBrickList);
 
 		solo.drag(20, 20, addedYPosition, yPosition.get(2), 20);
 
 		Sprite sprite = ProjectManager.getInstance().getCurrentSprite();
 		assertEquals("Incorrect number of Scripts.", 2, sprite.getNumberOfScripts());
 
+		display(6, projectBrickList);
+
 		solo.goBack();
 
 		yPosition = UiTestUtils.getListItemYPositions(solo);
-		solo.clickOnScreen(20, yPosition.get(3) - 20);
+		solo.clickOnScreen(20, yPosition.get(3));
 		clickOnDeleteInDialog();
+
+		display(7, projectBrickList);
 
 		assertEquals("Incorrect number of bricks.", 1, projectBrickList.size());
 		assertTrue("Wrong Brick instance.", (projectBrickList.get(0) instanceof ChangeYByNBrick));
@@ -128,23 +145,37 @@ public class LoopBrickTest extends ActivityInstrumentationTestCase2<MainMenuActi
 		assertEquals("Incorrect number of bricks.", 1, projectBrickList.size());
 		assertTrue("Wrong Brick instance.", (projectBrickList.get(0) instanceof ChangeYByNBrick));
 
+		display(8, projectBrickList);
+
 		UiTestUtils.addNewBrick(solo, R.string.brick_repeat);
 		yPosition = UiTestUtils.getListItemYPositions(solo);
 		addedYPosition = UiTestUtils.getAddedListItemYPosition(solo);
 		solo.drag(20, 20, addedYPosition, yPosition.get(3) + 20, 20);
+
+		display(9, projectBrickList);
 
 		UiTestUtils.addNewBrick(solo, R.string.brick_set_costume);
 		yPosition = UiTestUtils.getListItemYPositions(solo);
 		addedYPosition = UiTestUtils.getAddedListItemYPosition(solo);
 		solo.drag(20, 20, addedYPosition, yPosition.get(5) + 20, 20);
 
+		display(10, projectBrickList);
+
 		yPosition = UiTestUtils.getListItemYPositions(solo);
 		UiTestUtils.longClickAndDrag(solo, 10, yPosition.get(4), 10, yPosition.get(5) + 20, 20);
 		projectBrickList = project.getSpriteList().get(0).getScript(1).getBrickList();
 
+		display(11, projectBrickList);
+
 		assertTrue("Wrong Brick instance.", (projectBrickList.get(2) instanceof SetCostumeBrick));
 		assertTrue("Wrong Brick instance.", (projectBrickList.get(3) instanceof LoopEndBrick));
+	}
 
+	private void display(int line, List<Brick> bricks) {
+		System.out.println("LOG: line " + line);
+		for (int index = 0; index < bricks.size(); index++) {
+			System.out.println("LOG:    " + bricks.getClass().getSimpleName());
+		}
 	}
 
 	public void testForeverBrick() {
