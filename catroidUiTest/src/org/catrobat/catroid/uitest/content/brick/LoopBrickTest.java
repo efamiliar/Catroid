@@ -117,6 +117,9 @@ public class LoopBrickTest extends ActivityInstrumentationTestCase2<MainMenuActi
 		Sprite sprite = ProjectManager.getInstance().getCurrentSprite();
 		assertEquals("Incorrect number of Scripts.", 2, sprite.getNumberOfScripts());
 
+		System.out.println("LOG: " + sprite.getScript(0).getClass().getSimpleName());
+		System.out.println("LOG: " + sprite.getScript(1).getClass().getSimpleName());
+
 		solo.goBack();
 
 		yPosition = UiTestUtils.getListItemYPositions(solo);
