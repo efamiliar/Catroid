@@ -174,7 +174,7 @@ public class LoopBrickTest extends ActivityInstrumentationTestCase2<MainMenuActi
 	private void display(int line, List<Brick> bricks) {
 		System.out.println("LOG: line " + line);
 		for (int index = 0; index < bricks.size(); index++) {
-			System.out.println("LOG:    " + bricks.getClass().getSimpleName());
+			System.out.println("LOG:    " + bricks.get(index).getClass().getSimpleName());
 		}
 	}
 
